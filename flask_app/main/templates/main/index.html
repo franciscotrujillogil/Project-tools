@@ -1,0 +1,27 @@
+# my_complex_flask_app/main/templates/main/index.html
+"""
+{% extends "base.html" %}
+{% block title %}Home{% endblock %}
+{% block content %}
+    <h1>Welcome to My Complex Flask App!</h1>
+    <p>This is the home page. Explore our latest content.</p>
+
+    <h2>Latest Posts</h2>
+    {% if posts %}
+        <div class="post-list">
+            {% for post in posts %}
+                <article class="post-item">
+                    <h3><a href="{{ url_for('main.post', post_id=post.id) }}">{{ post.title }}</a></h3>
+                    <p class="post-meta">
+                        By {{ post.author.username }} on {{ post.date_posted.strftime('%Y-%m-%d') }}
+                    </p>
+                    <p>{{ post.content[:200] }}...</p> <!-- Display first 200 chars of content -->
+                    <a href="{{ url_for('main.post', post_id=post.id) }}" class="read-more">Read More</a>
+                </article>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p>No posts yet. Be the first to create one!</p>
+    {% endif %}
+{% endblock %}
+"""

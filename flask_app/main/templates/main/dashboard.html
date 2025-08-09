@@ -1,0 +1,32 @@
+# my_complex_flask_app/main/templates/main/dashboard.html
+"""
+{% extends "base.html" %}
+{% block title %}Dashboard{% endblock %}
+{% block content %}
+    <h1>Welcome to your Dashboard, {{ current_user.username }}!</h1>
+    <p>This is your personalized area where you can manage your content.</p>
+
+    <h2>Your Posts</h2>
+    {% if user_posts %}
+        <div class="post-list">
+            {% for post in user_posts %}
+                <article class="post-item">
+                    <h3><a href="{{ url_for('main.post', post_id=post.id) }}">{{ post.title }}</a></h3>
+                    <p class="post-meta">
+                        Posted on {{ post.date_posted.strftime('%Y-%m-%d') }}
+                    </p>
+                    <p>{{ post.content[:200] }}...</p>
+                    <div class="post-actions">
+                        <a href="{{ url_for('main.update_post', post_id=post.id) }}" class="btn btn-secondary">Update</a>
+                        <form action="{{ url_for('main.delete_post', post_id=post.id) }}" method="POST" style="display: inline;">
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                        </form>
+                    </div>
+                </article>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p>You haven't created any posts yet. <a href="{{ url_for('main.new_post') }}">Create your first post!</a></p>
+    {% endif %}
+{% endblock %}
+"""
